@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Helpdesk — Novo Ticket Demo</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="wrapper">
+  <header>
+    <a href="login-demo.html" class="logo">
+      <div class="logo-icon">⬡</div>
+      <span class="logo-text">SMARTHELPDESK</span>
+      <span class="logo-badge">demo</span>
+    </a>
+    <nav>
+      <a href="index-demo.html" class="active">Novo Ticket</a>
+      <a href="dashboard-demo.html">Dashboard</a>
+    </nav>
+  </header>
+  <main>
+    <div class="page-header">
+      <h1 class="page-title">Abrir <span>Novo Ticket</span></h1>
+      <p class="page-subtitle">Descreva o problema com o máximo de detalhes</p>
+    </div>
+    <div class="card animate-in delay-2">
+      <form id="ticketForm" autocomplete="off">
+        <div class="form-grid">
+          <div class="form-group animate-in delay-2">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" placeholder="Seu nome" required>
+          </div>
+          <div class="form-group animate-in delay-2">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="seu@email.com" required>
+          </div>
+          <div class="form-group animate-in delay-3">
+            <label for="assunto">Assunto</label>
+            <input type="text" id="assunto" placeholder="Resumo do problema" required>
+          </div>
+          <div class="form-group animate-in delay-3">
+            <label for="categoria">Categoria</label>
+            <select id="categoria">
+              <option value="">Selecione uma categoria</option>
+              <option value="suporte">Suporte Técnico</option>
+              <option value="financeiro">Financeiro</option>
+              <option value="tecnico">Infraestrutura</option>
+              <option value="acesso">Acesso / Login</option>
+              <option value="rede">Rede / Conectividade</option>
+              <option value="outros">Outros</option>
+            </select>
+          </div>
+          <div class="form-group full animate-in delay-4">
+            <label for="descricao">Descrição detalhada</label>
+            <textarea id="descricao" placeholder="Descreva o problema em detalhes..." required></textarea>
+          </div>
+          <div class="form-group full animate-in delay-5">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span>⟨</span> Transmitir Ticket <span>⟩</span>
+            </button>
+          </div>
+        </div>
+      </form>
+      <div id="mensagem" class="mensagem"></div>
+    </div>
+  </main>
+  <footer><span>SMART HELPDESK</span> &nbsp;·&nbsp; Modo Demo &nbsp;·&nbsp; <span>Neural AI v1.0</span></footer>
+</div>
+<script src="script-demo.js"></script>
+</body>
+</html>

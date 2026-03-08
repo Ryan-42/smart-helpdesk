@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Helpdesk — Ticket Demo</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="wrapper">
+  <header>
+    <a href="login-demo.html" class="logo">
+      <div class="logo-icon">⬡</div>
+      <span class="logo-text">SMARTHELPDESK</span>
+      <span class="logo-badge">demo</span>
+    </a>
+    <nav>
+      <a href="index-demo.html">Novo Ticket</a>
+      <a href="dashboard-demo.html">Dashboard</a>
+    </nav>
+  </header>
+  <main>
+    <div class="page-header animate-in">
+      <h1 class="page-title">Ticket <span id="ticketIdTitle">#—</span></h1>
+      <p class="page-subtitle">Detalhes completos e análise de inteligência artificial</p>
+    </div>
+    <div id="ticketDetalhes">
+      <div class="card animate-in delay-2" style="margin-bottom:1.5rem">
+        <div class="ticket-grid">
+          <div class="detail-group"><span class="detail-label">ID do Ticket</span><span class="detail-value" id="id">—</span></div>
+          <div class="detail-group"><span class="detail-label">Status Atual</span><span class="detail-value" id="status">—</span></div>
+          <div class="detail-group"><span class="detail-label">Nome</span><span class="detail-value" id="nome">—</span></div>
+          <div class="detail-group"><span class="detail-label">Email</span><span class="detail-value" id="email">—</span></div>
+          <div class="detail-group"><span class="detail-label">Assunto</span><span class="detail-value" id="assunto">—</span></div>
+          <div class="detail-group"><span class="detail-label">Categoria</span><span class="detail-value" id="categoria">—</span></div>
+          <div class="detail-group full"><span class="detail-label">Descrição</span><span class="detail-value" id="descricao" style="white-space:pre-line">—</span></div>
+        </div>
+        <div class="ai-box animate-in delay-3">
+          <div class="ai-metrics">
+            <div class="ai-metric"><div class="metric-label">Prioridade</div><div class="metric-value" id="prioridade">—</div></div>
+            <div class="ai-metric"><div class="metric-label">Sentimento</div><div class="metric-value" id="sentimento">—</div></div>
+            <div class="ai-metric"><div class="metric-label">Análise</div><div class="metric-value">Neural AI</div></div>
+          </div>
+          <div class="ai-response" id="resposta">—</div>
+        </div>
+      </div>
+      <div class="card animate-in delay-4">
+        <div class="detail-label" style="margin-bottom:1rem">Atualizar Status do Ticket</div>
+        <div class="status-update">
+          <select id="novoStatus">
+            <option value="aberto">Aberto</option>
+            <option value="em_andamento">Em Andamento</option>
+            <option value="resolvido">Resolvido</option>
+            <option value="fechado">Fechado</option>
+          </select>
+          <button id="atualizarStatus" class="btn btn-primary"><span>↻</span> Atualizar Status</button>
+          <a href="dashboard-demo.html" class="btn btn-ghost">← Voltar</a>
+        </div>
+        <div id="mensagem" class="mensagem"></div>
+      </div>
+    </div>
+  </main>
+  <footer><span>SMART HELPDESK</span> &nbsp;·&nbsp; Modo Demo &nbsp;·&nbsp; <span>Neural AI v1.0</span></footer>
+</div>
+<script src="script-demo.js"></script>
+</body>
+</html>
