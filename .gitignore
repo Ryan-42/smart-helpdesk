@@ -1,0 +1,11 @@
+node_modules/
+
+backend/tickets.db
+
+backend/.env
+
+*.log
+npm-debug.log*
+
+.DS_Store
+Thumbs.db
