@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Helpdesk — Usuários</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .role-admin {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.3);
+      color: var(--neon-violet);
+    }
+    .role-agente {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.2);
+      color: var(--neon-cyan);
+    }
+    .form-inline {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr auto;
+      gap: 1rem;
+      align-items: end;
+    }
+    @media(max-width:768px) {
+      .form-inline { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="wrapper">
+
+  <header>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">⬡</div>
+      <span class="logo-text">SMARTHELPDESK</span>
+      <span class="logo-badge">v1.0</span>
+    </a>
+    <nav>
+      <a href="index.html">Novo Ticket</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="usuarios.html" class="active">Usuários</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="page-header">
+      <h1 class="page-title">Gestão de <span>Usuários</span></h1>
+      <p class="page-subtitle">Painel restrito — somente administradores</p>
+    </div>
+
+    <!-- Criar usuário -->
+    <div class="card animate-in delay-2" style="margin-bottom:1.5rem">
+      <div class="detail-label" style="margin-bottom:1.2rem">Criar novo usuário</div>
+      <form id="createUserForm">
+        <div class="form-inline">
+          <div class="form-group" style="margin:0">
+            <label for="uNome">Nome</label>
+            <input type="text" id="uNome" placeholder="Nome completo" required>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label for="uEmail">Login / Email</label>
+            <input type="text" id="uEmail" placeholder="login ou email" required>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label for="uSenha">Senha</label>
+            <input type="password" id="uSenha" placeholder="Mínimo 6 caracteres" required>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label for="uRole">Perfil</label>
+            <select id="uRole">
+              <option value="agente">Agente</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" id="createBtn">+ Criar</button>
+        </div>
+      </form>
+      <div id="createMsg" class="mensagem"></div>
+    </div>
+
+    <!-- Tabela de usuários -->
+    <div class="table-wrapper animate-in delay-3">
+      <table>
+        <thead>
+          <tr>
+            <th>#ID</th>
+            <th>Nome</th>
+            <th>Login / Email</th>
+            <th>Perfil</th>
+            <th>Criado em</th>
+          </tr>
+        </thead>
+        <tbody id="usuariosTable">
+          <tr><td colspan="5">
+            <div class="empty-state">
+              <div class="empty-icon">◎</div>
+              <div class="empty-title">CARREGANDO</div>
+              <div class="empty-sub">// buscando usuários...</div>
+            </div>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <footer>
+    <span>SMART HELPDESK</span> &nbsp;·&nbsp; Painel Admin &nbsp;·&nbsp; <span>Neural AI v1.0</span>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Garante que só admin acessa
+  const usuario = JSON.parse(localStorage.getItem('sh_usuario') || 'null');
+  if (!usuario || usuario.role !== 'admin') {
+    window.location.href = 'dashboard.html';
+  }
+
+  const API = 'http://localhost:2500/api';
+
+  function authH() {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('sh_token')}`
+    };
+  }
+
+  function showMsg(id, text, type) {
+    const el = document.getElementById(id);
+    el.textContent = (type === 'sucesso' ? '✓  ' : '✗  ') + text;
+    el.className = 'mensagem show ' + type;
+    setTimeout(() => { el.className = 'mensagem'; }, 5000);
+  }
+
+  async function carregarUsuarios() {
+    const tabela = document.getElementById('usuariosTable');
+    try {
+      const res = await fetch(`${API}/auth/usuarios`, { headers: authH() });
+      const data = await res.json();
+
+      if (!data.length) {
+        tabela.innerHTML = `<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">◎</div><div class="empty-title">NENHUM USUÁRIO</div></div></td></tr>`;
+        return;
+      }
+
+      tabela.innerHTML = '';
+      data.forEach((u, i) => {
+        const tr = document.createElement('tr');
+        tr.classList.add('animate-in');
+        tr.style.animationDelay = `${i * 0.04}s`;
+        tr.innerHTML = `
+          <td>#${String(u.id).padStart(3,'0')}</td>
+          <td style="color:var(--text-primary);font-weight:600">${u.nome}</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:0.8rem">${u.email}</td>
+          <td><span class="role-${u.role}">${u.role}</span></td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted)">${new Date(u.criado_em).toLocaleDateString('pt-BR')}</td>
+        `;
+        tabela.appendChild(tr);
+      });
+
+    } catch (err) {
+      tabela.innerHTML = `<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">✗</div><div class="empty-title">ERRO AO CARREGAR</div></div></td></tr>`;
+    }
+  }
+
+  document.getElementById('createUserForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('createBtn');
+    btn.classList.add('loading');
+
+    const nome = document.getElementById('uNome').value.trim();
+    const email = document.getElementById('uEmail').value.trim();
+    const senha = document.getElementById('uSenha').value;
+    const role = document.getElementById('uRole').value;
+
+    if (senha.length < 6) {
+      showMsg('createMsg', 'Senha deve ter mínimo 6 caracteres.', 'erro');
+      btn.classList.remove('loading');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API}/auth/register`, {
+        method: 'POST',
+        headers: authH(),
+        body: JSON.stringify({ nome, email, senha, role })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.erro);
+
+      showMsg('createMsg', `Usuário "${nome}" criado com sucesso!`, 'sucesso');
+      document.getElementById('createUserForm').reset();
+      carregarUsuarios();
+
+    } catch (err) {
+      showMsg('createMsg', err.message, 'erro');
+    } finally {
+      btn.classList.remove('loading');
+    }
+  });
+
+  carregarUsuarios();
+</script>
+</body>
+</html>

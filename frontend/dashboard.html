@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Helpdesk — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scanlines"></div>
+
+<div class="wrapper">
+
+  <header>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">⬡</div>
+      <span class="logo-text">SMART<wbr>HELPDESK</span>
+      <span class="logo-badge">v1.0</span>
+    </a>
+    <nav>
+      <a href="index.html">Novo Ticket</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="page-header">
+      <h1 class="page-title">Central de <span>Tickets</span></h1>
+      <p class="page-subtitle">Monitoramento em tempo real do sistema de suporte</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card blue">
+        <div class="stat-label">Total</div>
+        <div class="stat-number" id="statTotal">—</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Abertos</div>
+        <div class="stat-number" id="statAbertos">—</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">Em Andamento</div>
+        <div class="stat-number" id="statAndamento">—</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Resolvidos</div>
+        <div class="stat-number" id="statResolvidos">—</div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#ID</th>
+            <th>Usuário</th>
+            <th>Assunto</th>
+            <th>Categoria</th>
+            <th>Prioridade</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="ticketsTable">
+          <tr>
+            <td colspan="7">
+              <div class="empty-state">
+                <div class="empty-icon">◎</div>
+                <div class="empty-title">CARREGANDO DADOS</div>
+                <div class="empty-sub">// aguardando conexão com o servidor...</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <footer>
+    <span>SMART HELPDESK</span> &nbsp;·&nbsp; Sistema de Suporte Inteligente &nbsp;·&nbsp; <span>Neural AI v1.0</span>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
