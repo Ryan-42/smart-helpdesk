@@ -2,6 +2,8 @@
 
 Sistema de helpdesk inteligente com análise automática de tickets via IA, autenticação JWT e painel de administração.
 
+ **[Ver Demo ao Vivo](https://ryan-42.github.io/smart-helpdesk/login-demo.html)** &nbsp;·&nbsp; login: `admin` / senha: `admin`
+
 ![Node.js](https://img.shields.io/badge/Node.js-v22-339933?style=flat-square&logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-v5-000000?style=flat-square&logo=express&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-better--sqlite3-003B57?style=flat-square&logo=sqlite&logoColor=white)
@@ -9,9 +11,7 @@ Sistema de helpdesk inteligente com análise automática de tickets via IA, aute
 
 ---
 
- **Demo:** https://SEU_USUARIO.github.io/smart-helpdesk/demo/login-demo.html
-
-##  Funcionalidades
+## Funcionalidades
 
 - **Criação de tickets** com análise automática de categoria, prioridade e sentimento
 - **Autenticação JWT** com sessão de 8 horas
@@ -22,7 +22,7 @@ Sistema de helpdesk inteligente com análise automática de tickets via IA, aute
 
 ---
 
-##  Tecnologias
+## Tecnologias
 
 **Backend**
 - Node.js + Express
@@ -37,7 +37,7 @@ Sistema de helpdesk inteligente com análise automática de tickets via IA, aute
 
 ---
 
-##  Estrutura do projeto
+## Estrutura do projeto
 
 ```
 smart-helpdesk/
@@ -74,7 +74,7 @@ smart-helpdesk/
 
 ---
 
-##  Como rodar
+## Como rodar
 
 **1. Clone o repositório**
 ```bash
@@ -115,18 +115,18 @@ Abra `frontend/index.html` com o **Live Server** do VS Code ou qualquer servidor
 
 ---
 
-##  Acesso padrão
+## Acesso padrão
 
 | Campo | Valor |
 |---|---|
 | Login | `admin` |
 | Senha | `admin` |
 
->  Altere a senha do admin após o primeiro acesso em produção.
+> Altere a senha do admin após o primeiro acesso em produção.
 
 ---
 
-##  Rotas da API
+## Rotas da API
 
 ### Autenticação
 | Método | Rota | Acesso | Descrição |
@@ -147,7 +147,7 @@ Abra `frontend/index.html` com o **Live Server** do VS Code ou qualquer servidor
 
 ---
 
-##  Perfis de acesso
+## Perfis de acesso
 
 | Funcionalidade | Admin | Agente |
 |---|---|---|
@@ -161,7 +161,7 @@ Abra `frontend/index.html` com o **Live Server** do VS Code ou qualquer servidor
 
 ---
 
-##  Análise de IA
+## Análise de IA
 
 O `aiAnalyzer` processa a descrição do ticket automaticamente e retorna:
 
@@ -172,6 +172,6 @@ O `aiAnalyzer` processa a descrição do ticket automaticamente e retorna:
 
 ---
 
-##  Licença
+## Licença
 
 Este projeto foi desenvolvido para fins de portfólio pessoal.
